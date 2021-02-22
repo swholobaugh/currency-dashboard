@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPrices, getIsLoaded } from './redux/selectors/index';
+import { fetchPricesStarted } from './redux/reducer';
+import Pages from './pages/index';
+import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from './theme';
 
-function App() {
+const App = () => {
+  const dispatch = useDispatch();
+
+  const priceSelector = useSelector(state => getPrices(state));
+  const isLoading = useSelector(state => state.reducer.isLoaded);
+  console.log(isLoading);
+  
+  const [prices, setPrices] = useState(null);
+  
+  useEffect(() => {
+    const initializeState = async () => {
+      await dispatch(fetchPricesStarted());
+      await setPrices(priceSelector);
+    }
+    initializeState();
+  }, []);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {
+        isLoading === false
+        ? null
+        : <Pages prices={priceSelector} />
+      }
+    </ThemeProvider>
   );
 }
 
