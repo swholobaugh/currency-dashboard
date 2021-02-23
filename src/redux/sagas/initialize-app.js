@@ -1,25 +1,51 @@
 import { getSymbolHistory } from '../../api/index';
 import { put, call, takeLatest } from 'redux-saga/effects';
-import { fetchBondsFailed, fetchBondsStarted, fetchBondsSucceeded } from '../reducer';
-
-const formatData = async (data) => {
-  
-  const ohlc = data.candles.map(item => {
-    return [item.datetime, item.open, item.high, item.low, item.close]
-  });
-
-  const volume = data.candles.map(item => {
-    return [item.datetime, item.volume]
-  });
-
-  const symbol = data.symbol;
-  
-  const empty = data.empty;
-  
-  return { ohlc, volume, symbol, empty };
-}
+import { fetchBondsFailed, 
+          fetchBondsStarted, 
+          fetchBondsSucceeded, 
+          fetchCommoditiesFailed, 
+          fetchCommoditiesSucceeded, 
+          fetchEquitiesFailed,
+          fetchEquitiesSucceeded 
+        } from '../reducer';
+import { formatData } from '../utils/format-data';
 
 function* initializeState() {
+
+  try {
+    const sp500Response = yield call(getSymbolHistory, 'SPX');
+    const ndxResponse = yield call(getSymbolHistory, 'NDX');
+
+    const sp500Data = yield formatData(sp500Response);
+    const ndxData = yield formatData(ndxResponse);
+
+    yield put (fetchEquitiesSucceeded({
+      sp500: sp500Data,
+      ndx: ndxData
+    }));
+
+  } catch (e) {
+    yield put (fetchEquitiesFailed({
+      error: e.message,
+    }));
+  }
+
+
+  try {
+    const goldResponse = yield call(getSymbolHistory, '/GC');
+
+    const goldData = yield formatData(goldResponse);
+
+    yield put (fetchCommoditiesSucceeded({
+      gold: goldData,
+    }));
+
+  } catch (e) {
+    yield put (fetchCommoditiesFailed({
+      error: e.message,
+    }));
+  }
+
 
   try {
     const fiveYearResponse = yield call(getSymbolHistory, 'FVX');
@@ -38,12 +64,12 @@ function* initializeState() {
     }));
 
   } catch (e) {
-    console.log(e);
 
     yield put (fetchBondsFailed({
       error: e.message,
     }));
   }
+
 }
 
 export default function* rootSaga() {

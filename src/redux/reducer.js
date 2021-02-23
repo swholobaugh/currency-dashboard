@@ -7,7 +7,13 @@ const initialState = {
     thirtyYear: [],
   },
   equities: {
-    sp500: []
+    sp500: [],
+    ndx: [],
+  },
+  commodities: {
+    usd: [],
+    gold: [],
+    oil: [],
   },
   isLoading: false,
   isLoaded: false,
@@ -35,12 +41,22 @@ const marketsSlice = createSlice({
     },
     fetchEquitiesSucceeded: (state, action) => {
       state.isLoading = false;
-      state.isLoaded = true;
       state.equities = action.payload
     },
     fetchEquitiesFailed: (state, action) => {
       state.isLoading = false;
       state.error = action.payload
+    },
+    fetchCommoditiesStarted: state => {
+      state.isLoading = true;
+    },
+    fetchCommoditiesSucceeded: (state, action) => {
+      state.isLoading = false;
+      state.commodities = action.payload
+    },
+    fetchCommoditiesFailed: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
     }
   }
 });
@@ -51,7 +67,10 @@ export const {
   fetchBondsSucceeded,
   fetchEquitiesStarted,
   fetchEquitiesSucceeded,
-  fetchEquitiesFailed
+  fetchEquitiesFailed,
+  fetchCommoditiesFailed,
+  fetchCommoditiesStarted,
+  fetchCommoditiesSucceeded
 } = marketsSlice.actions;
 
 export default marketsSlice.reducer;
