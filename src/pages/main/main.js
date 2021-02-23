@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   marketCard: {
-    
+    padding: theme.spacing(0.5)
   }
 }));
 
@@ -23,23 +23,20 @@ const Main = props => {
   return (
     <Layout props={props}>
       <Grid container className={classes.root}>
-        <Grid item xs={4}>
+        <Grid item xs={4} className={classes.marketCard} >
           <MarketCard 
-            className={classes.marketCard} 
             market={bonds} 
             title='Bond Market'
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={4} className={classes.marketCard} >
           <MarketCard 
-            className={classes.marketCard} 
             market={equities} 
             title='Equities Market'
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={4} className={classes.marketCard} >
           <MarketCard 
-            className={classes.marketCard} 
             market={commodities} 
             title='Commodities Market'
           />

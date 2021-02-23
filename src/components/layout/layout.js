@@ -8,10 +8,10 @@ const useStyles = makeStyles(theme => ({
   },
   children: {
     display: 'flex',
-    marginTop: '5em',
-    marginLeft: '1em',
-    marginRight: '1em',
-    width: '100%'
+    marginTop: '4.5em',
+    marginLeft: '.5em',
+    marginRight: '.5em',
+    width: '100%',
   }
 }));
 

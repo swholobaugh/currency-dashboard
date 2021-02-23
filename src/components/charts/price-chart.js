@@ -2,6 +2,9 @@ import React, { useRef } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Highcharts from 'highcharts/highstock';
 import HighchartsReact from 'highcharts-react-official';
+import DarkUnica from 'highcharts/themes/dark-unica';
+
+DarkUnica(Highcharts);
 
 const useStyles = makeStyles(theme => ({
   priceChartRoot: {

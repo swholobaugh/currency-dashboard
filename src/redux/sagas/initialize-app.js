@@ -32,12 +32,15 @@ function* initializeState() {
 
 
   try {
-    const goldResponse = yield call(getSymbolHistory, '/GC');
+    const goldResponse = yield call(getSymbolHistory, 'GLD');
+    const dollarResponse = yield call(getSymbolHistory, '$DXY');
 
     const goldData = yield formatData(goldResponse);
+    const dollarData = yield formatData(dollarResponse);
 
     yield put (fetchCommoditiesSucceeded({
       gold: goldData,
+      usd: dollarData,
     }));
 
   } catch (e) {
