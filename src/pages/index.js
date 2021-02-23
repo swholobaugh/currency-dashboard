@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Main from './main/main';
 
 const Pages = props => {
-  const { prices } = props;
+  const { bonds } = props;
 
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          <Main prices={prices} />
+          <Main bonds={bonds} />
         </Route>
       </Switch>
     </Router>

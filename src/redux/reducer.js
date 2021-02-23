@@ -1,25 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  prices: [],
+  bonds: {
+    fiveYear: [],
+    tenYear: [],
+    thirtyYear: [],
+  },
+  equities: {
+
+  },
   isLoading: false,
   isLoaded: false,
   error: null
 }
 
-const priceSlice = createSlice({
-  name: 'prices',
+const marketsSlice = createSlice({
+  name: 'markets',
   initialState,
   reducers: {
-    fetchPricesStarted: state => {
+    fetchBondsStarted: state => {
       state.isLoading = true;
     },
-    fetchPricesSucceeded: (state, action) => {
+    fetchBondsSucceeded: (state, action) => {
       state.isLoading = false;
       state.isLoaded = true;
-      state.prices = action.payload
+      state.bonds = action.payload
     },
-    fetchPricesFailed: (state, action) => {
+    fetchBondsFailed: (state, action) => {
       state.isLoading = false;
       state.error = action.payload
     }
@@ -27,8 +34,9 @@ const priceSlice = createSlice({
 });
 
 export const {
-  fetchPricesFailed,
-  fetchPricesStarted,
-  fetchPricesSucceeded
-} = priceSlice.actions;
-export default priceSlice.reducer;
+  fetchBondsFailed,
+  fetchBondsStarted,
+  fetchBondsSucceeded
+} = marketsSlice.actions;
+
+export default marketsSlice.reducer;

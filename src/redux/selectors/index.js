@@ -1,4 +1,4 @@
-import { getPrices } from './get-prices';
+import { getBonds } from './get-bonds';
 import { getIsLoaded } from './get-is-loaded';
 
-export { getPrices, getIsLoaded };
+export { getBonds, getIsLoaded };

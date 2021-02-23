@@ -7,7 +7,7 @@ export const getSymbolHistory = async (symbol) => {
     params: {
       apikey: key,
       periodType: 'month',
-      period: 1,
+      period: 6,
       frequencyType: 'daily',
       frequency: 1,
     }
