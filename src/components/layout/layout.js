@@ -15,12 +15,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Layout = ({props, children}) => {
+const Layout = props => {
   const classes = useStyles();
+  
+  const {
+    firebase,
+    isSignedIn,
+    providerId,
+    children
+  } = props;
 
   return(
     <div className={classes.layoutRoot}>
-      <Navbar />
+      <Navbar firebase={firebase} isSignedIn={isSignedIn} providerId={providerId} />
       <div className={classes.children}>{children}</div>
     </div>
   );

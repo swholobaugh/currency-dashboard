@@ -17,11 +17,18 @@ const useStyles = makeStyles(theme => ({
 const Main = props => {
   const classes = useStyles();
   const theme = useTheme();
-
-  const { bonds, equities, commodities } = props;
+  
+  const { 
+    bonds, 
+    equities, 
+    commodities,
+    firebase,
+    isSignedIn,
+    providerId 
+  } = props;
     
   return (
-    <Layout props={props}>
+    <Layout firebase={firebase} isSignedIn={isSignedIn} providerId={providerId}>
       <Grid container className={classes.root}>
         <Grid item xs={4} className={classes.marketCard} >
           <MarketCard 

@@ -14,6 +14,7 @@ import rootSaga from './redux/sagas/initialize-app';
 import firebase from 'firebase/app';
 import { FirebaseAuthProvider } from '@react-firebase/auth';
 import 'firebase/auth';
+import firebaseConfig from './auth/firebase';
 
 const sagaMiddleware = createSagaMiddleware();
 const logger = createLogger();
@@ -33,9 +34,11 @@ sagaMiddleware.run(rootSaga);
 
 
 ReactDOM.render(      
+  <FirebaseAuthProvider firebase={firebase} {...firebaseConfig}>
     <Provider store={store}>
         <App />
-    </Provider>,
+    </Provider>
+  </FirebaseAuthProvider>,
   document.getElementById('root')
 );
 

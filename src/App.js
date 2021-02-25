@@ -7,6 +7,15 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from './theme';
 
+import Login from './pages/login/login';
+
+import { 
+  FirebaseAuthConsumer,
+  IfFirebaseUnAuthed,
+  IfFirebaseAuthed 
+} from '@react-firebase/auth';
+
+
 const App = () => {
   const dispatch = useDispatch();
 
@@ -28,11 +37,19 @@ const App = () => {
       {
         isLoading === false
         ? null
-        : <Pages 
-            bonds={bondsSelector} 
-            equities={equitiesSelector} 
-            commodities={commoditiesSelector} 
-          />
+        : 
+        <div>
+          <IfFirebaseUnAuthed>
+            <Login />
+          </IfFirebaseUnAuthed>
+          <IfFirebaseAuthed>
+            <Pages 
+              bonds={bondsSelector} 
+              equities={equitiesSelector} 
+              commodities={commoditiesSelector} 
+            />
+          </IfFirebaseAuthed>
+        </div>
       }
     </ThemeProvider>
   );
