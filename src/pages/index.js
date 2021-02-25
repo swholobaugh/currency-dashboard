@@ -2,9 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Main from './main/main';
 
-
-
 const Pages = props => {
+
   const { 
     bonds, 
     equities, 
@@ -13,7 +12,6 @@ const Pages = props => {
     isSignedIn,
     providerId
   } = props;
-  
 
   return (
     <Router>

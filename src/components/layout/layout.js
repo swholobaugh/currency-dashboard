@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
 
 const Layout = props => {
   const classes = useStyles();
+  const theme = useTheme();
   
   const {
     firebase,
