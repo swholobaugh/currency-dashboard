@@ -4,7 +4,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import AppBar from '@material-ui/core/Appbar';
+import AppBar from '@material-ui/core/AppBar';
 
 const useStyles = makeStyles(theme => ({
   navbarRoot: {
