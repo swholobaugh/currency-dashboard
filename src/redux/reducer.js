@@ -15,6 +15,9 @@ const initialState = {
     gold: [],
     oil: [],
   },
+  forex: {
+
+  },
   isLoading: false,
   isLoaded: false,
   error: null

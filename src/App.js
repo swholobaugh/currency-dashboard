@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBonds, getEquities, getCommodities } from './redux/selectors/index';
 import { fetchBondsStarted } from './redux/reducer';

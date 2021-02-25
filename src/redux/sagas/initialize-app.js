@@ -6,7 +6,7 @@ import { fetchBondsFailed,
           fetchCommoditiesFailed, 
           fetchCommoditiesSucceeded, 
           fetchEquitiesFailed,
-          fetchEquitiesSucceeded 
+          fetchEquitiesSucceeded,
         } from '../reducer';
 import { formatData } from '../utils/format-data';
 
