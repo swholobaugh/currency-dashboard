@@ -27,6 +27,14 @@ const PriceChart = props => {
     },
     title: {
     },
+    plotOptions: {
+      candlestick: {
+        groupPadding: 0.1,
+        dataGrouping: {
+          groupPixelWidth: 5
+        }
+      }
+    },
     navigator: {
       enabled: false
     },
@@ -44,18 +52,6 @@ const PriceChart = props => {
           ]
         ]
       },
-      responsive: {
-        rules: [{
-          condition : {
-            maxWidth: 1200
-          },
-          chartOptions: {
-            rangeSelector: {
-              inputEnabled: false
-            }
-          }
-        }]
-      }
     }]
   }
 

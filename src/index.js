@@ -11,6 +11,10 @@ import { createLogger } from 'redux-logger';
 import marketsReducer from './redux/reducer';
 import rootSaga from './redux/sagas/initialize-app';
 
+import firebase from 'firebase/app';
+import { FirebaseAuthProvider } from '@react-firebase/auth';
+import 'firebase/auth';
+
 const sagaMiddleware = createSagaMiddleware();
 const logger = createLogger();
 
@@ -28,10 +32,10 @@ const store = configureStore({
 sagaMiddleware.run(rootSaga);
 
 
-ReactDOM.render(
-  <Provider store={store}>
-      <App />
-  </Provider>,
+ReactDOM.render(      
+    <Provider store={store}>
+        <App />
+    </Provider>,
   document.getElementById('root')
 );
 
