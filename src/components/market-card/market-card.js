@@ -1,51 +1,40 @@
 import React, { useState } from 'react';
-import { makeStyles, Table, useTheme } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { fetchSymbolsStarted } from '../../redux/redux-search/reducer';
 import PriceChart from '../../components/charts/price-chart';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
 
-const useStyles = makeStyles(theme => ({
-  mainRoot: {
-    flexGrow: 1,
-  }
-}));
+import { 
+  Card,
+  Navbar,
+  NavbarGroup,
+  InputGroup
+} from '@blueprintjs/core';
 
-const TabPanel = (props) => {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <div>{children}</div>
-        </Box>
-      )}
-    </div>
-  )
-}
+import styles from './market-card.module.css';
 
 const MarketCard = props => {
-  const classes = useStyles();
-  const theme = useTheme();
+  const dispatch = useDispatch();
 
   const { market, title } = props;
-
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  }
-
   const priceItems = Object.entries(market);
 
+  const handleChange = async (event) => {
+    //console.log(event.target.value);
+    await dispatch(fetchSymbolsStarted(event.target.value));
+  }
+
+  return (
+    <Card className={styles["card"]}>
+      <Navbar className={styles["card-header"]}>
+        <NavbarGroup>
+          <InputGroup onChange={handleChange} />
+        </NavbarGroup>
+      </Navbar>
+      <PriceChart />
+    </Card>
+  )
+
+  /*
   return (
     <Card
       elevation={0} 
@@ -74,7 +63,7 @@ const MarketCard = props => {
           </TabPanel>  
         )}
     </Card>    
-  );
+  );*/
   
 }
 

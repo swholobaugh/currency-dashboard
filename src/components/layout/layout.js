@@ -1,23 +1,10 @@
 import React from 'react';
-import Navbar from '../navbar/navbar';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Nav from '../navbar/navbar';
 
-const useStyles = makeStyles(theme => ({
-  layoutRoot: {
-    display: 'flex'
-  },
-  children: {
-    display: 'flex',
-    marginTop: '4.5em',
-    marginLeft: '.5em',
-    marginRight: '.5em',
-    width: '100%',
-  }
-}));
+import { Classes } from '@blueprintjs/core';
+import styles from './layout.module.css';
 
 const Layout = props => {
-  const classes = useStyles();
-  const theme = useTheme();
   
   const {
     firebase,
@@ -27,9 +14,9 @@ const Layout = props => {
   } = props;
 
   return(
-    <div className={classes.layoutRoot}>
-      <Navbar firebase={firebase} isSignedIn={isSignedIn} providerId={providerId} />
-      <div className={classes.children}>{children}</div>
+    <div className={Classes.DARK}>
+      <Nav firebase={firebase} isSignedIn={isSignedIn} providerId={providerId} />
+      <div className={styles.children}>{children}</div>
     </div>
   );
 }

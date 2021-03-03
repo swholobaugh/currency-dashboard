@@ -1,64 +1,64 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import AppBar from '@material-ui/core/AppBar';
 
-const useStyles = makeStyles(theme => ({
-  navbarRoot: {
-    display: 'flex'
-  },
-  appBar: {
-    height: '3.75em'
-  },
-  menuButton: {
-    alignSelf: 'flex-end'
-  },
-}));
+import { 
+  Alignment, 
+  Classes, 
+  Navbar, 
+  NavbarGroup, 
+  NavbarHeading,
+  Button,
+  Divider,
+  Menu,
+  MenuItem
+} from '@blueprintjs/core';
 
-const Navbar = props => {
-  const classes = useStyles();
-  const theme = useTheme();
+import { Popover2 } from '@blueprintjs/popover2';
+
+import { Select } from '@blueprintjs/select';
+
+import styles from './navbar.module.css';
+
+const NavMenu = props => {
   const firebase = props.firebase;
-
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget);
-  }
-  
-  const handleClose = () => {
-    setAnchorEl(null);
-  }
+  console.log(firebase);
 
   const handleLogout = () => {
-    setAnchorEl(null);
     firebase.auth().signOut();
   }
 
   return(
-    <AppBar position="fixed" className={classes.appBar}>
-      <div className={classes.menuButton}>
-        <IconButton 
-          id='menu' 
-          onClick={handleClick}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Menu 
-          id='menu'
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-        >
-          <MenuItem onClick={handleLogout}>Logout</MenuItem>
-        </Menu>
-      </div>
-    </AppBar>
-  );
+    <Menu minimal="true">
+      <MenuItem text="Dashboard" icon="dashboard" />
+      <MenuItem text="Chart" icon="chart" />
+      <Menu.Divider />
+      <MenuItem text="Logout" onClick={handleLogout} icon="log-out" />
+    </Menu>
+  )
 }
 
-export default Navbar;
+const Nav = props => {
+  const firebase = props.firebase;
+
+  return(
+    <div className={Classes.DARK}>
+      <Navbar className={styles['nav']}>
+        <NavbarGroup align={Alignment.LEFT}>
+          <NavbarHeading>marketDashboard</NavbarHeading>
+        </NavbarGroup>
+        <NavbarGroup align={Alignment.RIGHT}>
+          <Popover2 
+            content={<NavMenu firebase={firebase} />}
+            placement="left-end"
+            minimal={true}
+            transitionDuration={100}
+          >
+            <Button icon="cog" minimal={true} />
+          </Popover2>
+        </NavbarGroup>
+      </Navbar>
+    </div>
+  );
+
+}
+
+export default Nav;

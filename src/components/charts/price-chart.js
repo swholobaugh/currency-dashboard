@@ -66,14 +66,12 @@ const PriceChart = props => {
   }
 
   return (
-    <div>
-      <HighchartsReact
-        highcharts={Highcharts}
-        constructorType={'stockChart'}
-        options={options}
-        ref={chartRef}
-      />
-    </div>
+    <HighchartsReact
+      highcharts={Highcharts}
+      constructorType={'stockChart'}
+      options={options}
+      ref={chartRef}
+    />
   );
 }
 

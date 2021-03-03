@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Main from './main/main';
+import Main from './dashboard/dashboard';
 
 const Pages = props => {
 

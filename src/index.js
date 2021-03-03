@@ -8,8 +8,13 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import { createLogger } from 'redux-logger';
-import marketsReducer from './redux/reducer';
-import rootSaga from './redux/sagas/initialize-app';
+import marketsReducer from './redux/redux-markets/reducer';
+import searchReducer from './redux/redux-search/reducer';
+import rootSaga from './redux/redux-initialize/sagas/root-saga';
+
+import 'normalize.css';
+import '@blueprintjs/core/lib/css/blueprint.css';
+import '@blueprintjs/icons/lib/css/blueprint-icons.css';
 
 import firebase from 'firebase/app';
 import { FirebaseAuthProvider } from '@react-firebase/auth';
@@ -19,14 +24,11 @@ import firebaseConfig from './auth/firebase';
 const sagaMiddleware = createSagaMiddleware();
 const logger = createLogger();
 
-const rootReducer = (state = {}, action) => {
-  return {
-    reducer: marketsReducer(state.reducer, action),
-  }
-}
-
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    markets: marketsReducer,
+    search: searchReducer
+  },
   middleware: [sagaMiddleware, logger],
 });
 
