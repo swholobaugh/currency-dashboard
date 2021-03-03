@@ -1,36 +1,73 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchSymbolsStarted } from '../../redux/redux-search/reducer';
+import { getSymbolList } from '../../redux/redux-search/selectors/index';
 import PriceChart from '../../components/charts/price-chart';
+import styles from './market-card.module.css';
 
 import { 
+  Button,
   Card,
   Navbar,
   NavbarGroup,
-  InputGroup
+  NavbarHeading,
+  InputGroup,
+  Menu,
+  MenuItem,
+  Position
 } from '@blueprintjs/core';
 
-import styles from './market-card.module.css';
+import { Select } from '@blueprintjs/select';
+
 
 const MarketCard = props => {
-  const dispatch = useDispatch();
-
   const { market, title } = props;
   const priceItems = Object.entries(market);
 
-  const handleChange = async (event) => {
-    //console.log(event.target.value);
-    await dispatch(fetchSymbolsStarted(event.target.value));
+  const [chart, setChart] = useState();
+
+
+  const renderChart = () => {
+    return (
+      chart && <PriceChart prices={chart.ohlc} symbol={chart.symbol} volume={chart.volume} />
+    )
+  }
+
+  const handleItemSelect = event => {
+    const chartSelection = priceItems.filter(item => item[1].symbol === event);
+    setChart({
+      ohlc: chartSelection[0][1].ohlc,
+      volume: chartSelection[0][1].volume,
+      symbol: chartSelection[0][1].symbol
+    });
+  }
+
+  const renderItem = (item, { handleClick, modifiers, query }) => {
+    return (
+      <MenuItem
+        active={modifiers.active}
+        disabled={modifiers.disabled}
+        onClick={handleClick}
+        text={item}
+      />
+    )
   }
 
   return (
     <Card className={styles["card"]}>
       <Navbar className={styles["card-header"]}>
         <NavbarGroup>
-          <InputGroup onChange={handleChange} />
+          <Select
+            filterable={false}
+            items={['FVX', 'TNX', 'TYX']}
+            itemRenderer={renderItem}
+            onItemSelect={handleItemSelect}
+          >
+            <Button text="Bonds" />
+          </Select>
         </NavbarGroup>
       </Navbar>
-      <PriceChart />
+      {renderChart()}
     </Card>
   )
 

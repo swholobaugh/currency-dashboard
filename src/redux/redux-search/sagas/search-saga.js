@@ -1,6 +1,6 @@
 import { searchSymbol } from '../../../api/index';
 import { put, call, takeLatest, select } from 'redux-saga/effects';
-import { getSearchValue } from '../selectors/get-value';
+import { getSearchValue } from '../selectors/get-symbol-list';
 
 import { 
   fetchSymbolsStarted,
@@ -11,7 +11,6 @@ import {
 function* searchSymbols() {
 
   const state = yield select();
-  console.log(state.search.searchValue);
 
   try {
     const response = yield call(searchSymbol, state.search.searchValue);

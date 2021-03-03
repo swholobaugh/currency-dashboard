@@ -19,12 +19,12 @@ const Main = props => {
     <Layout firebase={firebase} isSignedIn={isSignedIn} providerId={providerId}>
       <MarketCard 
         className={styles['market-card']}
-        market={bonds} 
+        market={bonds}
         title='Bond Market'
       />
     </Layout>
   );
-  
+
   /*
   return (
     <Layout firebase={firebase} isSignedIn={isSignedIn} providerId={providerId}>
