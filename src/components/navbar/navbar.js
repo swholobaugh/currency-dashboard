@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { 
   Alignment, 
@@ -20,7 +21,7 @@ import styles from './navbar.module.css';
 
 const NavMenu = props => {
   const firebase = props.firebase;
-  console.log(firebase);
+  const history = useHistory();
 
   const handleLogout = () => {
     firebase.auth().signOut();
@@ -28,8 +29,16 @@ const NavMenu = props => {
 
   return(
     <Menu minimal="true">
-      <MenuItem text="Dashboard" icon="dashboard" />
-      <MenuItem text="Chart" icon="chart" />
+      <MenuItem 
+        text="Dashboard" 
+        icon="dashboard"
+        onClick={() => history.push('/')} 
+      />
+      <MenuItem 
+        text="Chart" 
+        icon="chart"
+        onClick={() => history.push('/chart')} 
+      />
       <Menu.Divider />
       <MenuItem text="Logout" onClick={handleLogout} icon="log-out" />
     </Menu>

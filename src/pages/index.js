@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import ChartView from './chart-view/chart-view';
 import Main from './dashboard/dashboard';
 
 const Pages = props => {
@@ -26,6 +27,15 @@ const Pages = props => {
               isSignedIn={isSignedIn}
               providerId={providerId}
             />}
+        </Route>
+        <Route path="/chart">
+          {isSignedIn &&
+            <ChartView
+              firebase={firebase}
+              isSignedIn={isSignedIn}
+              providerId={providerId}
+            />
+          }
         </Route>
       </Switch>
     </Router>
