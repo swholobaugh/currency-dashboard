@@ -9,11 +9,11 @@ import {
 
 const ChartView = props => {
 
-  const { firebase, isSignedIn, providerId } = props;
- 
+  const { equities, firebase, isSignedIn, providerId } = props;
+  
   return (
     <Layout firebase={firebase} isSignedIn={isSignedIn} providerId={providerId}>
-      <ChartCard />
+      <ChartCard equities={equities} />
     </Layout>
   )
 }

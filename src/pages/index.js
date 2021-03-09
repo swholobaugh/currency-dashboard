@@ -31,6 +31,7 @@ const Pages = props => {
         <Route path="/chart">
           {isSignedIn &&
             <ChartView
+              equities={equities}
               firebase={firebase}
               isSignedIn={isSignedIn}
               providerId={providerId}
