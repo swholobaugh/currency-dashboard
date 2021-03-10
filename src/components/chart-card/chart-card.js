@@ -60,25 +60,10 @@ const ChartCard = props => {
   const chartWidth = 1200;
   const chartHeight = 600;
 
-  const margin = { top: 20, bottom: 20, left: 20, right: 20 };
-
-  //const xMax = chartWidth - margin.left - margin.right;
-  //const yMax = chartHeight - margin.top - margin.bottom;
-
-  /*
-  const x = data.ohlc.map(item => item[0]);
-  const y = data.ohlc.map(item => {
-    return {
-      open: item[1],
-      high: item[2],
-      low: item[3],
-      close: item[4]
-    }
-  });  
-  */
+  const margin = { top: 10, bottom: 10, left: 10, right: 10 };
 
   const xScale = scaleBand({
-    range: [0, chartWidth - 50],
+    range: [20, chartWidth - 50],
     domain: priceData.map(item => item.closeDate),
     padding: 0.3
   });
@@ -93,13 +78,6 @@ const ChartCard = props => {
     domain: [minLowPrice - 3, maxHighPrice]
   });
   
-  
-  /*
-  const accessors = {
-    xAccessor: data => data.ohlc[0][0],
-    yAccessor: data => data.ohlc[0]
-  }
-  */
   
   return (
     <Card>
