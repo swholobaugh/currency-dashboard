@@ -93,7 +93,6 @@ const ChartCard = props => {
               width={chartWidth} 
               height={chartHeight}
               scale={yScale}
-              stroke="rgba(255,255,255,0.3)"
             />
             <GridColumns 
               width={chartWidth}

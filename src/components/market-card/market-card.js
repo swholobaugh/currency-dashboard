@@ -41,7 +41,7 @@ const MarketCard = props => {
       symbol: chartSelection[0][1].symbol
     });
   }
-
+  
   const renderItem = (item, { handleClick, modifiers, query }) => {
     return (
       <MenuItem
